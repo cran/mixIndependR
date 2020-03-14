@@ -1,3 +1,12 @@
+# mixIndependR 0.2.1 -2020.03.11
+# Fix Bugs
+- Fix the error that "AlleleShare_Table" cannot deal with samples with odd sample size when "replicate=F"
+# Add New Function
+- Add a function named as "Prop_Pvalue" which can generate a bundle of p-values for one sample
+# Update Description Files
+- The Edition
+
+
 # mixIndependR 0.2.0 -2020.02.01
 # Fix bugs
 - Fix format conflict in "AlleleShare_Table"

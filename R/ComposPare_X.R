@@ -1,6 +1,6 @@
 #'Generate Comparison Observed and Expected No. of Shared Alleles.
 #'@details This function generates a dataframe in which the observed and expected shared alleles for each pair of individuals. The observed ones are calculated from the original dataset through "AlleleShare_Table". However, the expected ones are simulated according to the expected probability with the same sample size as the observed sample.
-#'#'@usage ComposPare_X(AS,Ex,trans=...)
+#'@usage ComposPare_X(AS,Ex,trans=TRUE)
 #'@param AS a double made up of "0","1" and "2" denoting number of shared alleles; Outcome of function "AlleleShare_Table"; Each column denotes each locus and each row denotes each pair of individuals.
 #'@param Ex a dataframe of expected density, outcome of function "DistAlleleShare", on each possible total number of shared Alleles.
 #'@param trans a logic variable, if True, the outcome is a dataframe of n x 2. n is the number of individuals of original imported database. First column is the observed No. of Heterozygous Loci and the second is the expected one. If False, the dataframe is 2n x 2, where n is the number of individuals of original imported database. The first column is a categorical variable denoting the frequency is observed or expected value; the second column is the frequency of No. of heterozygous loci.
@@ -11,7 +11,7 @@
 #'Ex <- data.frame(X=c(0:8),Density=rnorm(9,mean = 0.5,sd=0.05))
 #'ComposPare_X(AS,Ex,trans = TRUE)
 
-ComposPare_X <- function(AS,Ex,trans)
+ComposPare_X <- function(AS,Ex,trans=TRUE)
 {
   Obs_AS<-data.frame(rowSums(AS))
   colnames(Obs_AS)<-c("X_io")

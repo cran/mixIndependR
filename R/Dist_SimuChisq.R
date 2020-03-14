@@ -11,7 +11,7 @@
 #'h<-runif(10)
 #'s<-Simulate_DistK(h,500,100)
 #'Exp <- DistHetero(h)
-#'Dist_SimuChisq(s,Exp$Density,100)
+#'Dist_SimuChisq(s,Exp$Density,10)
 
 Dist_SimuChisq <- function(s,prob,b){
   idx <-which(prob==0)

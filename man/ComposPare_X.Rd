@@ -4,7 +4,7 @@
 \alias{ComposPare_X}
 \title{Generate Comparison Observed and Expected No. of Shared Alleles.}
 \usage{
-ComposPare_X(AS, Ex, trans)
+ComposPare_X(AS,Ex,trans=TRUE)
 }
 \arguments{
 \item{AS}{a double made up of "0","1" and "2" denoting number of shared alleles; Outcome of function "AlleleShare_Table"; Each column denotes each locus and each row denotes each pair of individuals.}
@@ -21,7 +21,6 @@ Generate Comparison Observed and Expected No. of Shared Alleles.
 }
 \details{
 This function generates a dataframe in which the observed and expected shared alleles for each pair of individuals. The observed ones are calculated from the original dataset through "AlleleShare_Table". However, the expected ones are simulated according to the expected probability with the same sample size as the observed sample.
-#'@usage ComposPare_X(AS,Ex,trans=...)
 }
 \examples{
 AS<-matrix(sample(c(0:2),20,replace=TRUE,prob=c(0.3,0.3,0.4)),nrow=5)

@@ -27,5 +27,5 @@ require(mixIndependR)
 h<-runif(10)
 s<-Simulate_DistK(h,500,100)
 Exp <- DistHetero(h)
-Dist_SimuChisq(s,Exp$Density,100)
+Dist_SimuChisq(s,Exp$Density,10)
 }

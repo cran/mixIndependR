@@ -22,8 +22,14 @@ AlleleShare_Table <- function(x,replicate=TRUE)
   d <- mat.or.vec(2,n/2)
   if(replicate){
     d<-combn(n,2,simplify = TRUE)}else{
-      d[1,]<- sample(n,n/2,replace = FALSE)
-      d[2,]<- setdiff(c(1:n),d[1,])
+      if ((n %% 2) == 0){
+        d[1,]<- sample(n,n/2,replace = FALSE)
+        d[2,]<- sample(setdiff(c(1:n),d[1,]))
+      }else{
+        d[1,]<- sample(n,(n-1)/2,replace = FALSE)
+        d[2,]<- sample(setdiff(c(1:n),d[1,]))[-1]
+      }
+
     }
 
   p <- ncol(d) ###number of pairs####
