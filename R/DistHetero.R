@@ -31,3 +31,4 @@ DistHetero <- function(H)
   }
   return(data.frame("K"=c(0:N),"Density"=(P[N,])))
 }
+

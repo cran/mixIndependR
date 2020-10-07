@@ -11,18 +11,5 @@
 
 
 counta <- function(z,y){
-  f <- 0
-  n <- length(z)
-  for (i in 1:n){
-    if (is.na(z[i])){
-      f <- f
-    }else{
-      if (z[i]==y){
-        f <- f+1
-      }else{
-        f <- f
-      }
-    }
-  }
-  return(f)
+  return(sum(z==y,na.rm = TRUE))
 }

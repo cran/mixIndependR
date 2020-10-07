@@ -1,3 +1,21 @@
+# mixIndependR 0.3.0 -2020.10.05
+# New Functions
+- add two functions "mixIndependK" and "mixIndependX"
+- remove the function "Prop_Pvalue"
+# Vignette
+- Vignettes are built
+
+
+# mixIndependR 0.2.3 -2020.09.24
+# Optimization
+- optimize the function "Prop_Pvalue" by adding a logical variable "print".
+
+
+# mixIndependR 0.2.2 -2020.09.20
+# Optimization
+- simplify function "counta"
+
+
 # mixIndependR 0.2.1 -2020.03.11
 # Fix Bugs
 - Fix the error that "AlleleShare_Table" cannot deal with samples with odd sample size when "replicate=F"

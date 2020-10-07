@@ -16,23 +16,6 @@ AlleleFreq <- function(x){
     x <- as.matrix(x)
     m <- nrow(x)    #number of individuals
     n <- ncol(x)/2   #number of loci
-    counta <- function(z,y){
-      f <- 0
-      k <- length(z)
-      for (i in 1:k){
-        if (is.na(z[i])){
-          f <- f
-        }else{
-          if (z[i]==y){
-            f <- f+1
-          }else{
-            f <- f
-          }
-        }
-      }
-      return(f)
-    }
-    #####funciton to count, missing value counts as 0#####
   Allele <- as.data.frame(table(x))   #####All allleles included####
   l <- nrow(Allele)   #####Number of Alleles
   p <- mat.or.vec(l,n)

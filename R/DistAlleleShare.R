@@ -19,8 +19,6 @@ DistAlleleShare <- function(e)
   P[1,2] <- e[1,2]
   P[1,3] <- e[1,3]
 
-  P
-
   for (r in 2:N)
   {
     P[r,1] <- P[r-1,1]*e[r,1]
