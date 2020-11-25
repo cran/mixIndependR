@@ -4,10 +4,12 @@
 \alias{AlleleFreq}
 \title{Calculate Allele Frequency}
 \usage{
-AlleleFreq(x)
+AlleleFreq(x,sep)
 }
 \arguments{
-\item{x}{a dataset of alleles. Type needs to be Homogeneous. Each row denotes each sample. One allele in one cell.In the (2r-1)th column, there is the other allele on the same locus from that in the 2r-th column; noted: no column for ID, make row.names=1 when importing.}
+\item{x}{a dataset of genotypes. Each row denotes each individual; each column contain each marker.}
+
+\item{sep}{the allele separator in the imported genotype data.Note: when using the special character like "|", remember to protect it as "\\|"(default).}
 }
 \value{
 a matrix of allele frequencies. Each row denotes each allele; each column denotes each marker. The order of makers follows x.
@@ -19,10 +21,9 @@ Calculate Allele Frequency
 This function calculates the allele frequencies of one dataset.
 }
 \examples{
-x <- data.frame(STR1=c(12,13,13,14,15,13,14,12,14,15),
-               STR1_1=c(12,14,13,15,13,14,13,12,14,15),
-               SNP1=c("A","T","A","A","T","A","A","T","T","A"),
-               SNP1_1=c("A","T","T","T","A","T","A","A","T","T"))
-AlleleFreq(x)
+require(mixIndependR)
+x <- data.frame(STR1=c("12|12","13|14","13|13","14|15"),
+               SNP1=c("A|A","T|T","A|T","A|T"))
+AlleleFreq(x,"\\\\|")
 
 }

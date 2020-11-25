@@ -21,9 +21,8 @@ install.packages("mixIndependR")
 
 ## Example
 
-Usually the dataset imported are allele frequency data with sample ID in
-each row and the marker name in each column. Every two columns denote
-the same marker for diploid like autosomes of human beings.
+The dataset imported can be genotype data with sample ID in each row and
+the marker name in each column.Excel, csv, and vcf files are compatible.
 
 ``` r
 library(mixIndependR)

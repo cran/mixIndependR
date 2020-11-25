@@ -4,10 +4,12 @@
 \alias{Heterozygous}
 \title{Test heterozygosity at each locus}
 \usage{
-Heterozygous(x)
+Heterozygous(x,sep)
 }
 \arguments{
-\item{x}{a dataset of alleles. Each row denotes each individual.One allele in one cell.In the (2r-1)th column, there is the same locus with the 2r-th column; noted: no column for ID, make row.names=1 when importing.}
+\item{x}{a dataset of genotypes with rownames of sample ID and column names of markers.}
+
+\item{sep}{allele separator in the imported genotype data. Note: when using the special character like "|", remember to protect it as "\\|"(default).}
 }
 \value{
 a dataframe of heterozygosity.0 is homozygous;1 is heterozygous. Each row denotes each individual; Each column denotes each locus.
@@ -19,10 +21,8 @@ Test heterozygosity at each locus
 This function test the heterozygosity of each individuals at each locus.Output a table and Usually followed by write.csv(as.data.frame(y),file = "~/*.csv") to export the results.
 }
 \examples{
-x <- data.frame(STR1=c(12,13,13,14,15,13,14,12,14,15),
-               STR1_1=c(12,14,13,15,13,14,13,12,14,15),
-               SNP1=c("A","T","A","A","T","A","A","T","T","A"),
-               SNP1_1=c("A","T","T","T","A","T","A","A","T","T"))
-Heterozygous(x)
+x <- data.frame(STR1=c("12|12","13|14","13|13","14|15"),
+               SNP1=c("A|A","T|T","A|T","A|T"))
+Heterozygous(x,"\\\\|")
 
 }

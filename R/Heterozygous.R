@@ -1,37 +1,25 @@
 #'Test heterozygosity at each locus
 #'@details This function test the heterozygosity of each individuals at each locus.Output a table and Usually followed by write.csv(as.data.frame(y),file = "~/*.csv") to export the results.
-#'@usage Heterozygous(x)
-#'@param x a dataset of alleles. Each row denotes each individual.One allele in one cell.In the (2r-1)th column, there is the same locus with the 2r-th column; noted: no column for ID, make row.names=1 when importing.
+#'@usage Heterozygous(x,sep)
+#'@param x a dataset of genotypes with rownames of sample ID and column names of markers.
+#'@param sep allele separator in the imported genotype data. Note: when using the special character like "|", remember to protect it as "\\|"(default).
 #'@return a dataframe of heterozygosity.0 is homozygous;1 is heterozygous. Each row denotes each individual; Each column denotes each locus.
 #'@export
 #'@examples
-#'x <- data.frame(STR1=c(12,13,13,14,15,13,14,12,14,15),
-#'                STR1_1=c(12,14,13,15,13,14,13,12,14,15),
-#'                SNP1=c("A","T","A","A","T","A","A","T","T","A"),
-#'                SNP1_1=c("A","T","T","T","A","T","A","A","T","T"))
-#'Heterozygous(x)
+#'x <- data.frame(STR1=c("12|12","13|14","13|13","14|15"),
+#'                SNP1=c("A|A","T|T","A|T","A|T"))
+#'Heterozygous(x,"\\|")
 #'
-Heterozygous <- function(x){
-  x <- as.matrix(x)
-  n <- nrow(x)
-  m <- ncol(x)
-  y <- mat.or.vec(n,m/2)
-  y
-  for (i in 1:n){
-    for (r in 1:(m/2)){
-      if (x[i,(2*r)]==x[i,(2*r-1)])
-        y[i,r] <-0
-      else
-        y[i,r] <-1
-    }
-  }
-  M<-colnames(x)
-  Ms <- rep.int(0,m/2)
-  l <- m/2
-  for (i in 1:l){
-    Ms[i] <- M[2*i-1]
-  }
-  colnames(y)<-Ms
-  rownames(y)<-rownames(x)
-  return(y)
+Heterozygous <- function(x,sep="\\|"){
+  g2 <- as.matrix(x)
+  n <- nrow(g2)
+  m <- ncol(g2)
+  a1<-matrix(sapply(strsplit(g2,sep),"[",1),nrow = n,ncol=m,byrow = F)
+  a2<-matrix(sapply(strsplit(g2,sep),"[",2),nrow = n,ncol=m,byrow = F)
+  colnames(a1) <- colnames(g2)
+  rownames(a1) <- rownames(g2)
+  H<-matrix(as.numeric(!a1==a2),nrow = n,ncol = m,byrow = F)
+  colnames(H) <- colnames(g2)
+  rownames(H) <- rownames(g2)
+  return(H)
 }
