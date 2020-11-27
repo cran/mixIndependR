@@ -4,11 +4,12 @@ knitr::opts_chunk$set(
   comment = "#>"
 )
 
-## ----load package-------------------------------------------------------------
+## ----load package,include = FALSE---------------------------------------------
 library(mixIndependR)
+library(ggplot2)
 
 ## ----preparation, include=FALSE-----------------------------------------------
-x <- data.frame(STR1=c("12|12","13|14","13|13","14|15","15|13","13|14","14|13","12|12","14|14","15|15"),SNP1=c("A|A","T|T","A|T","A|T","T|A","A|T","A|A","T|A","T|T","A|T"))
+x <- mixexample
 
 p <- AlleleFreq(x)
 h <-Heterozygous(x)
@@ -21,20 +22,28 @@ ObsDist_X<-FreqAlleleShare(AS)
 ExpDist_X<-DistAlleleShare(e)
 
 ## ----Simulation---------------------------------------------------------------
-Simu_K <- Simulate_DistK(H,50,500)
-Simu_X <- Simulate_DistX(e,25,500)
+Simu_K <- Simulate_DistK(H,100,500)
+Simu_X <- Simulate_DistX(e,100,500)
 
 ## ----Chi-square---------------------------------------------------------------
-x2_K<-Dist_SimuChisq(Simu_K,ExpDist_K$Density,100)
-x2_X<-Dist_SimuChisq(Simu_X,ExpDist_X$Density,100)
+x2_K<-Dist_SimuChisq(Simu_K,ExpDist_K$Density,200)
+x2_X<-Dist_SimuChisq(Simu_X,ExpDist_X$Density,200)
 P1<-ecdf(x2_K)
 P2<-ecdf(x2_X)
 
-## ----Last plot, echo=FALSE,fig.show='hold'------------------------------------
-plot(P1)
-abline(h=0.95)
-text(1,0.8,"0.95")
-plot(P2)
-abline(h=0.95)
-text(1,0.8,"0.95")
+## ----Last plot, echo=FALSE, fig.height=4, fig.show='hold', fig.width=3--------
+x <- c(0:200)
+dfX2 <- data.frame(x=x,y=P1(x))
+ggplot(dfX2,aes(x=x,y=P1(x)))+
+  geom_line()+
+  geom_hline(yintercept = 0.95,color="Red")+
+  ggtitle("CPF No. of Heterozygous Loci")+
+  xlab("Chi-square")+ylab("1-p-value")
+
+dfX22 <- data.frame(x=x,y=P2(x))
+ggplot(dfX22,aes(x=x,y=P2(x)))+
+  geom_line()+
+  geom_hline(yintercept = 0.95,color="Red")+
+  ggtitle("CPF No. of Shared Alleles")+
+  xlab("Chi-square")+ylab("1-p-value")
 

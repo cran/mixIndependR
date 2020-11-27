@@ -4,42 +4,35 @@ knitr::opts_chunk$set(
   comment = "#>"
 )
 
-## ---- echo = FALSE------------------------------------------------------------
-x <- data.frame(STR1=c("12|12","13|14","13|13","14|15","15|13","13|14","14|13","12|12","14|14","15|15"),SNP1=c("A|A","T|T","A|T","A|T","T|A","A|T","A|A","T|A","T|T","A|T"))
-
-print(x)
-
 ## ----setup--------------------------------------------------------------------
+
+## ----load packages, include=FALSE---------------------------------------------
 library(mixIndependR)
 
-## -----------------------------------------------------------------------------
-AlleleFreq(x,sep = "\\|")
+## ----import-------------------------------------------------------------------
+x <- mixexample
 
-## -----------------------------------------------------------------------------
-GenotypeFreq(x,sep = "\\|",expect = FALSE)  ####or GenotypeFreq(x)
-GenotypeFreq(x,sep = "\\|",expect = TRUE) ####or GenotypeFreq(x,expect =T)
+## ----allele freq, echo=TRUE---------------------------------------------------
+p <- AlleleFreq(x,sep = "\\|")
 
-## -----------------------------------------------------------------------------
+## ----genotype freq, echo=TRUE-------------------------------------------------
+G <- GenotypeFreq(x,sep = "\\|",expect = FALSE) 
+G0 <- GenotypeFreq(x,sep = "\\|",expect = TRUE) 
+
+## ----Heterozygosity, echo=TRUE------------------------------------------------
 h <-Heterozygous(x,sep = "\\|") ####or Just use Heterozygous(x)
-print(h)
 
-## -----------------------------------------------------------------------------
-p<-AlleleFreq(x,sep = "\\|")
+## ----Hetero Expect, echo=TRUE-------------------------------------------------
 H <- RxpHetero(h,p,HWE=TRUE)
-head(H)
 
-## -----------------------------------------------------------------------------
-AS<-AlleleShare(x,sep = "\\|",replacement = FALSE) ###or without "sep="
-head(AS)
+## ----AS-----------------------------------------------------------------------
+AS<-AlleleShare(x,sep = "\\|",replacement = FALSE) 
 
-## -----------------------------------------------------------------------------
+## ----Allele Share Expect, message=FALSE, warning=FALSE------------------------
 e <-RealProAlleleShare(AS)
 e0<-ExpProAlleleShare(p)
-head(e)
-head(e0)
 
-## -----------------------------------------------------------------------------
-g <- GenotypeFreq(x,expect=FALSE)
-g0 <- GenotypeFreq(x,expect=TRUE)
-HWE.Chisq(g,g0,rescale.p = T,simulate.p.value = T,B=2000)
+## ----HWE----------------------------------------------------------------------
+
+HWE_pvalue <-HWE.Chisq(G,G0,rescale.p = T,simulate.p.value = T,B=2000)
 
