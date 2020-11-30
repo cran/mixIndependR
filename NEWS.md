@@ -1,3 +1,7 @@
+# mixIndependR 0.4.3 -2020.11.29
+- Fix the bugs about exports of functions "read_vcf_gt" and "splitGenotypes".
+- Update the NAMESPACE file to including the missing functions.
+
 # mixIndependR 0.4.2 -2020.11.26
 # Bug Fix
 - Fix the bugs about dependency and support in "Description".
