@@ -1,8 +1,12 @@
+# mixIndependR 1.0.0 -2021.03.16
+- updated "AlleleShare" and it is not compatible with odd sample size.
+- update the version number and maintainer's email address.
+
 # mixIndependR 0.4.4 -2021.01.07
 - add citation information and publication link
 
 # mixIndependR 0.4.3 -2020.11.29
-- Fix the bugs about exports of functions "read_vcf_gt" and "splitGenotypes".
+- Fix the bugs about exports of functions "read_vcf_gt" and "splitGenotype".
 - Update the NAMESPACE file to including the missing functions.
 
 # mixIndependR 0.4.2 -2020.11.26
